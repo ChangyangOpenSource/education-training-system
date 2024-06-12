@@ -1,0 +1,19 @@
+<view class="plv-mp-sign__wrap {{ showSign ? 'sign-show' : '' }}">
+  <view class="plv-mp-sign__countdown">{{ !success ? limitTime : '' }}
+    <view wx:if="success" class="{{ success ? 'plv-mp-sign__success' : '' }}"></view>
+  </view>
+  <view class="plv-mp-sign__container">
+    <icon type="clear" size="20" class="plv-mp-sign__close__icon" bindtap="hideSign" />
+    <text class="sign-message">{{ message }}</text>
+    <view>
+      <button class="plv-sign-container__btn" type="default" disabled="{{ disabled }}" bindtap="toSignin">{{ buttonMsg }}</button>
+    </view>
+  </view>
+</view>
+<modal
+  id="answerModal"
+  wx:if="{{ showModal }}"
+  class="plv-mp-question-modal"
+  modalData="{{ modalData }}"
+  bind:onModalHide="onModalHide">
+</modal>

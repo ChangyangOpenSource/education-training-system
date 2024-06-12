@@ -1,0 +1,26 @@
+<import src="../../common/authInfo/authInfo.wxml"/>
+<view class="plv-auth-check">
+  <view class="plv-auth-check__head">
+    <text bindtap="hide">×</text>
+    <text>{{ headText }}</text>
+  </view>
+  <view class="plv-auth-check__code" wx:if="{{ authType === 'code' }}">
+    <input bindinput="bindKeyInput" placeholder="{{ authSettings.qcodeTips }}" auto-focus />
+    <image
+      wx:if="authSettings.qcodeImg"
+      bindtap='previewImage'
+      class="plv-auth__ercode"
+      src="https:{{ authSettings.qcodeImg }}" />
+  </view>
+  <view class="plv-auth-check__code" wx:if="{{ authType === 'phone' }}">
+    <input bindinput="bindKeyInput" placeholder="请输入验证信息" auto-focus />
+  </view>
+  <view class="plv-auth-check__info" wx:if="{{ authType === 'info' }}">
+    <block wx:for="{{ infoFieldsModels }}" wx:for-index="index" wx:for-item="item" wx:key="index">
+      <template is="authInfo" data="{{ ...item, index, infoParams, infoImage, disable, smsBtnText }}" />
+    </block>
+  </view>
+  <view class="plv-auth-check__btn">
+    <button catchtap="authCheck">提交</button>
+  </view>
+</view>

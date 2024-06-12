@@ -1,0 +1,1 @@
+const LANGUAGE={TITLE:"答题卡",SCORE_TITLE:"评分",SUBMIT:"提交",MULTI_CHOICE:"(多选)",SUBMIT_DONE:"提交成功",CUT_OFF:"已截止",CORRECT_ANSWER:"回答正确",WRONG_ANSWER:"回答错误",NO_ANSWER:"未作答",AVERAGE:"平均得分",IKNOW:"我知道了",SUBMIT_FAILED:"提交失败",IGNORE:"忽略",ANSWER_END:"答题已结束",ANSWER_SUBMITED:"已答题"};module.exports=LANGUAGE;

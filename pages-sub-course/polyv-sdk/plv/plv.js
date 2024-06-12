@@ -1,0 +1,1 @@
+import plv from"../index";Component({properties:{apiId:String,apiSecret:String,options:Object},ready(){plv.setApp({apiId:this.data.apiId,apiSecret:this.data.apiSecret,chatToken:this.data.chatToken,verifyUrl:this.data.verifyUrl}),plv.init(this.data.options).then(t=>{this.triggerEvent("inited",t)})},detached(){plv.destroy()}});

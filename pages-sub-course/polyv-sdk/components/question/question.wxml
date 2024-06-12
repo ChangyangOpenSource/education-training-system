@@ -1,0 +1,98 @@
+<view
+  style="z-index: {{ zIndex }}"
+  class="plv-mp-question-wrap {{ showQuestion ? 'show' : '' }}"
+  wx:if="{{ showQuestion }}">
+  <!-- 面板标题 -->
+  <view class="plv-mp-question-panel-title">
+    <text>{{ popupTitle }}</text>
+    <image
+      class="plv-mp-question-panel-title__close"
+      src="../../assets/images/interact-btn-close.png"
+      bindtap="closeQuestion"></image>
+  </view>
+  <!-- 问卷内容 -->
+  <scroll-view scroll-y class="plv-mp-question-content">
+    <view class="plv-mp-question-content_container">
+      <!-- 问卷标题 -->
+      <view class="plv-mp-question-title">{{ questionTitle }}</view>
+      <block
+        wx:for="{{ subjectList }}"
+        wx:for-item="subjectItem"
+        wx:for-index="subjectIndex"
+        wx:key="subjectIndex">
+        <view class="plv-mp-question-subject">
+          <!-- 题目标题 -->
+          <view class="plv-mp-question-subject-title">
+            <!-- 题目 -->
+            <text class="plv-mp-question-subject-title_text">【{{ subjectIndex + 1 }}】{{ subjectItem.subjectTitle }}</text>
+            <!-- 是否必填 -->
+            <text
+              class="plv-mp-question-subject-title_require"
+              wx:if="{{ subjectItem.required }}">*</text>
+            <!-- 题目类型 -->
+            <text
+              class="plv-mp-question-subject-title_type"
+              wx:if="{{ subjectItem.typeText }}">{{ subjectItem.typeText }}</text>
+            <!-- 分值 -->
+            <text
+              class="plv-mp-question-subject-title_score"
+              wx:if="{{ subjectItem.scoreEnabled }}">({{ subjectItem.score }}分)</text>
+          </view>
+          <!-- 单选题选项 -->
+          <block wx:if="{{ subjectItem.type === 'R' }}">
+            <view
+              class="plv-mp-question-subject-option {{ optionItem.isSelect ? 'selected' : '' }}"
+              wx:for="{{ subjectItem.subjectOptions }}"
+              wx:for-item="optionItem"
+              wx:for-index="optionIndex"
+              wx:key="optionIndex"
+              data-subject-index="{{ subjectIndex }}"
+              data-option-index="{{ optionIndex }}"
+              bindtap="selectRadio">
+              <text class="plv-mp-question-subject-option_label">{{ optionItem.option }}，</text>
+              <text class="plv-mp-question-subject-option_text">{{ optionItem.text }}</text>
+            </view>
+          </block>
+          <!-- 多选题选项 -->
+          <block wx:if="{{ subjectItem.type === 'C' }}">
+            <view
+              class="plv-mp-question-subject-option {{ optionItem.isSelect ? 'selected' : '' }}"
+              wx:for="{{ subjectItem.subjectOptions }}"
+              wx:for-item="optionItem"
+              wx:for-index="optionIndex"
+              wx:key="optionIndex"
+              data-subject-index="{{ subjectIndex }}"
+              data-option-index="{{ optionIndex }}"
+              bindtap="selectCheckbox">
+              <text class="plv-mp-question-subject-option_label">{{ optionItem.option }}，</text>
+              <text class="plv-mp-question-subject-option_text">{{ optionItem.text }}</text>
+            </view>
+          </block>
+          <!-- 问答题输入框 -->
+          <block wx:if="{{ subjectItem.type === 'Q' }}">
+            <textarea
+              class="plv-mp-question-subject-textarea"
+              value="{{ subjectItem.answerText }}"
+              data-subject-index="{{ subjectIndex }}"
+              bindinput="inputAnswerText"
+              ></textarea>
+          </block>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+  <!-- 提交按钮 -->
+  <view class="plv-mp-question-bottom">
+    <view
+      class="plv-mp-question-bottom_submit_btn"
+      bindtap="submitQuestion">{{ submitTitle }}</view>
+  </view>
+</view>
+
+<modal
+  id="answerModal"
+  wx:if="{{ showModal }}"
+  class="plv-mp-question-modal"
+  modalData="{{ modalData }}"
+  bind:onModalHide="onModalHide">
+</modal>

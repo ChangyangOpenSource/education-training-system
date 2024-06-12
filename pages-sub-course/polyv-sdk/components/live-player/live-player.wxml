@@ -1,0 +1,78 @@
+<view class="plv-player-live">
+  <!-- 播放限制 -->
+  <cover-view
+    wx:if="{{ !canWatch }}"
+    class="plv-player-live__canot__watch">
+    <cover-image class="player-canot-watch__image" src="https://livestatic.videocc.net/v_84/assets/wimages/icon.png"></cover-image>
+    <cover-view class="player-canot-watch__view">当前在线无法播放</cover-view>
+    <cover-view class="player-canot-watch__view">
+      请刷新重试或向管理员反馈{{ errorCode }}
+    </cover-view>
+  </cover-view>
+  <!-- 在线播放 当forceVideo为true则强制使用video组件在线 -->
+  <live-player
+    wx:if="{{ liveMode === 1 && !forceVideo }}"
+    class="plv-player-live__player plv-player-live__player__live"
+    id="plvLivePlayer"
+    src="{{ videoSrc }}"
+    min-cache="1"
+    max-cache="1"
+    autoplay="true"
+    catchtap="showPlayControl"
+    bindstatechange="onStateChange">
+    <danmu wx:if="{{ danmuEnabled && closeDanmuEnable === 'N' && isDocTypeAndNotSwitch && allowDanmu }}" />
+    <skin
+      wx:if="{{ (showControl || skinAlwaysShow )&& usePlayerSkin }}"
+      lines="{{ lines }}"
+      forceVideo="{{ forceVideo }}"
+      liveMode="{{ liveMode }}"
+      closeDanmuEnable="{{ closeDanmuEnable }}"
+      changeScreenSuccess="{{ changeScreenSuccess }}"
+      currentLine="{{ currentLine }}"
+      currentRate="{{ currentRate }}"
+      danmuEnabled="{{ danmuEnabled }}"
+      allowDanmu="{{ allowDanmu }}"
+      bind:changePlayStatus="changePlayStatus"
+      bind:refresh="refresh"
+      bind:changeScreen="changeScreen"
+      bind:changeLine="changeLine"
+      bind:updateDanmuEnabled="updateDanmuEnabled" />
+  </live-player>
+  <!-- 暂存|回放列表| 暖场视频 -->
+  <video
+    wx:elif="{{ liveMode === 2 || (liveMode !== 0 && forceVideo) }}"
+    class="plv-player-live__player plv-player-live__player__vod"
+    id="plvLiveVodPlayer"
+    src="{{ videoSrc }}"
+    loop="{{ isWarm }}"
+    controls="{{ liveMode === 2 }}"
+    enable-danmu="{{ true }}"
+    autoplay
+    bindtap="showPlayControl"
+    bindended="onLiveVodEnded"
+    binderror="onLiveVodError"
+    bindtimeupdate="onLiveTimeUpdate"/>
+  <!-- 暖场图片 | 当前暂无在线 -->
+  <image
+    wx:else
+    src="{{ imgSrc }}"
+    class="plv-player-live__player plv-player-live__player__image"
+    mode="aspectFill"/>
+    <danmu wx:if="{{ liveMode !== 2 && forceVideo && danmuEnabled && closeDanmuEnable === 'N' && allowDanmu }}" />
+    <skin
+      wx:if="{{ usePlayerSkin && forceVideo && ((showControl && ((liveMode === 1) || liveMode === 2)) || skinAlwaysShow) }}"
+      liveMode="{{ liveMode }}"
+      lines="{{ lines }}"
+      forceVideo="{{ forceVideo }}"
+      closeDanmuEnable="{{ closeDanmuEnable }}"
+      changeScreenSuccess="{{ changeScreenSuccess }}"
+      currentLine="{{ currentLine }}"
+      currentRate="{{ currentRate }}"
+      danmuEnabled="{{ danmuEnabled }}"
+      bind:changePlayStatus="changePlayStatus"
+      bind:refresh="refresh"
+      bind:changeScreen="changeScreen"
+      bind:changeLine="changeLine"
+      bind:changeRate="changeRate"
+      bind:updateDanmuEnabled="updateDanmuEnabled" />
+</view>

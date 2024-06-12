@@ -1,0 +1,16 @@
+<view class="plv-mp-chat-msg-content">
+  <image
+    wx:if="{{ content.type === 'chatImg' }}"
+    class="plv-mp-chat-msg-img"
+    mode="widthFix"
+    src="{{ content.uploadImgUrl }}"
+    style="width: {{ content.size.width/2 }}rpx; height: {{ content.size.height/2 }}rpx;"
+    bindtap="tapImage"
+  />
+  <block wx:else>
+    <block wx:for="{{ contentArr }}" wx:for-index="itemIndex" wx:for-item="item" wx:key="itemIndex">
+      <text class="plv-mp-chat-msg-content-title" wx:if="{{ item.type === 'text' }}">{{ item.content }}</text>
+      <image wx:else src="{{ item.url }}" style="width:30px;height:30px;" mode="widthFix"></image>
+    </block>
+  </block>
+</view>

@@ -1,0 +1,28 @@
+<view class="plv-mp-chatroom-wrap plv-mp-skin__{{ skin }}">
+  <scroll-view class="plv-mp-chatroom-scroll-view" scroll-top="{{ scrollTop }}" bindscroll="onChatListScroll" scroll-y>
+    <chat-list
+      id="chatList"
+      isOnlyHost="{{ isOnlyHost }}"
+      chat-list="{{ chatList }}"
+      has-more="{{ hasMore }}"
+      bindseemore="handleSeeMore"
+      skin="{{ skin }}"
+    />
+  </scroll-view>
+  <view wx:if="{{ comeMore }}" class="plv-mp-chatroom-more" bindtap="handleSeeMoreMsg">有更多新消息，点击查看</view>
+
+  <!-- 点赞 -->
+  <view class="plv-mp-chatroom-thumb" bindtap="handleLike" wx:if="{{ showSendLike }}">
+    <image src="../../assets/images/chat-icon-thumb.png" class="plv-mp-chatroom-icon__thumb" />
+    <text class="plv-mp-chatroom-thumb__text">{{ channelDetail.likes }}</text>
+  </view>
+
+  <chat-edit
+    skin="{{ skin }}"
+    bindlike="handleLike"
+    bindsengmsg="handleSendMsg"
+    bindonlyhost="handleOnlyHost"
+    bindshowbulletin="handleShowBulletin"
+    showBulletin="{{ showBulletin }}"
+  />
+</view>

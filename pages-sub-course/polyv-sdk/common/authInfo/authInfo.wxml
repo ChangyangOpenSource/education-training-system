@@ -1,0 +1,38 @@
+<template name="authInfo">
+  <view class="plv-auth-info" wx:if="{{ type === 'name' }}">
+    {{ name }}
+    <input type="text" data-index="{{ index }}" bindinput="infoInput" placeholder="{{ placeholder }}"/>
+  </view>
+  <view class="plv-auth-info" wx:if="{{ type === 'number' }}">
+    {{ name }}
+    <input type="digit" data-index="{{ index }}" bindinput="infoInput" placeholder="{{ placeholder }}"/>
+  </view>
+  <view class="plv-auth-info" wx:if="{{ type === 'text' }}">
+    {{ name }}
+    <input type="text" data-index="{{ index }}" bindinput="infoInput" placeholder="{{ placeholder }}"/>
+  </view>
+  <view class="plv-auth-info" wx:if="{{ type === 'mobile' }}">
+    {{ name }}
+    <input bindinput="telInput" type="number" placeholder="{{ placeholder }}"/>
+  </view>
+  <view wx:if="{{ type === 'mobile' && sms === 'Y' }}">
+    <view class="plv-auth-info">
+      <input bindinput="kaptchaInput" placeholder="请输入验证码"/>
+      <image bindtap="getInfoImage" src="{{ infoImage }}" />
+    </view>
+    <view class="plv-auth-info">
+      <input bindinput="msgInput" placeholder="短信验证码"/>
+      <button
+        bindtap="getInfoMsg"
+        plain
+        class="plv-info__get__msg {{ disable ? 'btn-disabled' : '' }}">{{ smsBtnText }}</button>
+    </view>
+  </view>
+  <view class="plv-auth-info" wx:if="{{ type === 'option' }}">
+    <text>{{ name }}</text>
+    <picker bindchange="bindPickerChange" data-index="{{ index }}" value="{{ infoParams[index] }}" range="{{ options }}">
+      <view class="picker">
+        {{ options[infoParams[index]] }}
+      </view>
+    </picker>
+  </view>

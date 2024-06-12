@@ -1,0 +1,13 @@
+<view
+  id="plvMenuBar"
+  class="plv-mp-menubar-wrap {{ isLessTab ? 'plv-mp-menubar-wrap__less' : '' }} plv-mp-skin__{{ skin }}"
+  bindtap="changeMenu">
+  <view wx:for="{{ menuList }}" wx:for-index="index" wx:for-item="item" wx:key="index">
+    <view
+      wx:if="{{index == 0}}"
+      class="plv-mp-menubar-item {{ index === activeIndex ? 'plv-mp-menubar-item__on' : '' }} {{ item.menuType === 'qa' && hasNewQuiz && index !== activeIndex ? 'plv-mp-quiz__tips' : '' }}"
+      data-index="{{ index }}">
+      {{ item.name }}
+    </view>
+  </view>
+</view>

@@ -1,0 +1,24 @@
+<view>
+  <view class="chapter-container plv-mp-skin__{{ skin }}">
+    <view wx:if="{{ playBackListData.length > 0 }}">
+      <view
+        class="chapter-li"
+        wx:for="{{ playBackListData }}"
+        wx:key="index"
+        bindtap="tapPlayback"
+        data-idx="{{ index }}"
+      >
+        <view class="playback-image">
+          <image mode="aspectFill" class="playback-first-image" src="{{ item.firstImage }}"/>
+          <image mode="aspectFill" class="cover-icon back-playing" src="{{ index === currentIndex ? currentImage[0] : '../../assets/images/icon-play-back.png' }}" />
+        </view>
+        <view class="playback-list-msg">
+          <text class="charpter-text list-title {{ index === currentIndex ? 'chapter-color' : 'title-color' }} ">{{ item.title }}</text>
+          <image mode="aspectFill" class="list-duration-icon"
+                 src="{{ index === currentIndex ? currentImage[1] : ('../../assets/images/' + skin + '/icon-duration.png') }}" />
+          <text class="harpter-text list-time {{ index === currentIndex ? 'chapter-color' : 'title-color' }}">{{ item.duration }}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

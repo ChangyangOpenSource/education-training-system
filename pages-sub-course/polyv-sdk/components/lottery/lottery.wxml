@@ -1,0 +1,66 @@
+<view class="plv-mp-lottery" style="z-index: {{ zIndex }}" wx:if="{{ lotteryShow }}">
+  <view class="plv-mp-lottery__head">
+    <image
+      bindtap="handleClick"
+      wx:if="{{ lotteryStatus === 'list' || lotteryStatus === 'submit' }}"
+      data-type="back"
+      class="plv-lottery-head-image plv-mp-lottery__back"
+      src="https://livestatic.videocc.net/assets/wimages/lottery-btn-return@2x.png" />
+    <image
+      bindtap="handleClick"
+      data-type="close"
+      class="plv-lottery-head-image plv-mp-lottery__clear"
+      src="https://livestatic.videocc.net/assets/wimages/lottery-btn-close@2x.png" />
+    <text class="plv-lottery-head__text">{{ headText }}</text>
+  </view>
+  <view class="plv-mp-lottery__start" wx:if="{{ lotteryStatus === 'start' }}">
+    <image class="plv-lottery-start__image" src="https://livestatic.videocc.net/assets/wimages/gift.gif" />
+  </view>
+  <view class="plv-mp-lottery__result result-win" wx:if="{{ lotteryStatus === 'win' }}">
+    <image class="plv-mp-lottery__result__image" src="https://livestatic.videocc.net/assets/wimages/icon-lottery-zj@2x.png" />
+    <text class="plv-mp-lottery__result__text">恭喜您抽中“{{ prize }}”</text>
+    <view class="plv-mp-lottery__code">兑换码为:<text class="lottery-code__text">{{ winnerCode }}</text></view>
+    <view
+      wx:if="{{ handleList.length > 0 }}"
+      class="plv-mp-lottery__check__list"
+      bindtap="handleClick"
+      data-type="list">查看中奖名单</view>
+    <button class="plv-lottery__result__btn result-win__button" bindtap="handleClick" data-type="submit">填写联系信息</button>
+  </view>
+  <view class="plv-mp-lottery__result result-submit" wx:if="{{ lotteryStatus === 'submit' }}">
+    <text class="result-submit__text">请填写以下信息，后续会有工作人员与您联系</text>
+    <view class="plv-mp-lottery__input__content">
+      <input class="result-submit__input input-content" type="text" placeholder="请输入您的姓名" bindblur="getName" auto-focus />
+      <input class="result-submit__input input-content" type="number" bindblur="checkPhone" maxlength="11" placeholder="请输入您的手机号码" />
+      <block wx:for="{{ customInfo }}" wx:key="index">
+        <input class="result-submit__input input-content" bindblur="getCustom" data-index="{{ index }}" type="text" placeholder="{{ item.tips }}" />
+      </block>
+    </view>
+    <button class="plv-lottery__result__btn result-submit__btn" bindtap="submitInfo">提交</button>
+  </view>
+  <view class="plv-mp-lottery__result result-list" wx:if="{{ lotteryStatus === 'list' }}">
+    <view class="plv-mp-lottery__list__content">
+      <scroll-view
+        scroll-y
+        style="height: 100%"
+        class="plv-mp-chatroom-scroll-view"
+        scroll-top="{{ scrollTop }}"
+        bindscrolltolower="getListWinners">
+          <view class="plv-lottery-list__view" wx:for="{{ handleList }}" wx:for-item="li" wx:key="index">
+            <text class="plv-mp-lottery__result__text list__view__text" wx:for="{{ li }}" wx:key="item">{{ item }}</text>
+          </view>
+      </scroll-view>
+    </view>
+    <button class="plv-lottery__result__btn result-list__btn" bindtap="handleClick" data-type="back">返回</button>
+  </view>
+  <view class="plv-mp-lottery__result result-thx" wx:if="{{ lotteryStatus === 'notWin' }}">
+    <image class="plv-mp-lottery__result__image" src="https://livestatic.videocc.net/assets/wimages/icon-lottery-wzj@2x.png" />
+    <text class="plv-mp-lottery__result__text">很遗憾您未中奖，谢谢参与</text>
+    <view
+      wx:if="{{ handleList.length > 0 }}"
+      class="plv-mp-lottery__check__list"
+      bindtap="handleClick"
+      data-type="list">查看中奖名单</view>
+    <button class="plv-lottery__result__btn result-thx__btn" bindtap="handleClick" data-type="close">我知道了</button>
+  </view>
+</view>

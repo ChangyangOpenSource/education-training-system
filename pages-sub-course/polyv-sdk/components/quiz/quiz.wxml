@@ -1,0 +1,14 @@
+<view class="plv-mp-chatroom-wrap plv-mp-skin__{{ skin }}">
+  <scroll-view class="plv-mp-chatroom-scroll-view" scroll-top="{{ scrollTop }}" scroll-y>
+    <chat-list
+      id="quizList"
+      chat-list="{{ quizList }}"
+      skin="{{ skin }}"
+    />
+  </scroll-view>
+  <chat-edit
+    isAsk="true"
+    skin="{{ skin }}"
+    bindsengmsg="handleSendMsg"
+  />
+</view>

@@ -1,0 +1,53 @@
+<view class="plv-mp-chat-list-wrap plv-mp-skin__{{ skin }}">
+  <view wx:if="{{ hasMore }}" class="plv-mp-chat-list-show-more" bindtap="tapSeeMore">查看更多</view>
+  <view class="plv-mp-chat-list-list">
+    <view class="plv-mp-chat-list-item" wx:for="{{ chatList }}" wx:for-index="index" wx:for-item="item" wx:key="id">
+      <!-- 是否只看主持人 -->
+      <block wx:if="{{ !isOnlyHost || (isOnlyHost && (item.system || item.actor || item.user.actor || item.currentUser)) }}">
+        <!-- 打赏 -->
+        <view wx:if="{{ item.reward }}" class="plv-mp-chat-list-msg-flower">
+          <view wx:if="{{ item.content.gimg }}" class="plv-chat-list-flower__view">
+            {{ item.content.unick }} 赠送了 {{ item.content.rewardContent }} <image mode="aspectFill" src="{{ item.content.gimg }}" class="plv-mp-chat-list-icon__flower" />
+          </view>
+          <view class="plv-chat-list-flower__view" wx:else>
+            <image mode="aspectFill" class="plv-mp-chat-list-reward-cash"
+            src="https://router.polyv.net/proxy/livestatic.videocc.net/assets/wimages/icon-redpaper.png" /> {{ item.content.unick }} 打赏了 {{ item.content.rewardContent }} 元
+          </view>
+        </view>
+        <!-- 系统 -->
+        <view wx:elif="{{ item.system}}" class="plv-mp-chat-list-msg-system">{{ item.content }}</view>
+        <!-- 送花或点赞 -->
+        <view wx:elif="{{ item.flowers || item.EVENT === 'LIKES' }}" class="plv-mp-chat-list-msg-flower">
+          {{ item.nick }} 赠送了鲜花 <image mode="aspectFill" src="../../assets/images/chat-icon-flower.png" class="plv-mp-chat-list-icon__flower" />
+        </view>
+        <!-- 自定义消息 -->
+        <view wx:elif="{{ item.isCustomMsg }}" class="plv-mp-chat-list-msg-custom">
+          <text>{{ item.content }}</text>
+          <image class="plv-mp-chat-list-msg-custom__image" wx:if="{{ item.image }}" src="{{ item.image }}" />
+        </view>
+        <!-- 自己 -->
+        <view wx:elif="{{ item.currentUser }}" class="plv-mp-chat-list-msg-other">
+          <image class="plv-mp-chat-list-user-avatar" src="{{ item.user.pic }}" />
+          <view class="plv-mp-chat-list-user-info">
+            <text class="plv-mp-chat-list-user-info__actor" wx:if="{{ item.actor || item.user.actor }}">{{ item.actor || item.user.actor }}</text>
+            <text>{{ item.user.nick || item.user.userName }}</text>
+          </view>
+          <view class="plv-mp-chat-list-msg-content">
+            <content-parser content="{{ item.content }}" />
+          </view>
+        </view>
+        <!-- 他人 -->
+        <view wx:else class="plv-mp-chat-list-msg-other {{ item.actor || item.user.actor ? 'plv-mp-chat-list-msg-other__actor' : '' }}">
+          <image class="plv-mp-chat-list-user-avatar" src="{{ item.user.pic }}" />
+          <view class="plv-mp-chat-list-user-info">
+            <text class="plv-mp-chat-list-user-info__actor" wx:if="{{ item.actor || item.user.actor }}">{{ item.actor || item.user.actor }}</text>
+            <text>{{ item.user.nick || item.user.userName }}</text>
+          </view>
+          <view class="plv-mp-chat-list-msg-content">
+            <content-parser content="{{ item.content }}" />
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+<import src="../../common/wxParse/wxParse.wxml"/>
+<view class="plv-mp-menu-custom-detail plv-mp-skin__{{ skin }}">
+  <block wx:for="{{ htmlParserTpl.nodes }}" wx:for-index="index" wx:for-item="item" wx:key="index">
+    <template is="wxParse0" data="{{ item }}">
+  </block>
+</view>

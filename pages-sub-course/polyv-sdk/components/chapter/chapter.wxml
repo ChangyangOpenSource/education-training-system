@@ -1,0 +1,22 @@
+<!-- <view class="plv-mp-chapter-wrap"> -->
+<scroll-view scroll-y class="plv-mp-chapter-list plv-mp-skin__{{ skin }}">
+  <view
+    wx:for="{{ list }}"
+    wx:for-index="index"
+    wx:for-item="item"
+    wx:key="index"
+    class="plv-mp-chapter-item {{ curIndex === index ? 'plv-mp-chapter-item-selected' : '' }}"
+    bindtap="tapChapterItem"
+    data-index="{{ index }}"
+  >
+    <image
+      class="plv-mp-chapter-item__icon"
+      src="{{ curIndex === index ? '../../assets/images/icon-chapter-onfocus.png' : ('../../assets/images/' + skin + '/icon-chapter-normal.png') }}"
+    ></image>
+    <view class="plv-mp-chapter-item__content">
+      <text>{{ item.title }}</text>
+      <text>{{ item.duration }}</text>
+    </view>
+  </view>
+</scroll-view>
+<!-- </view> -->

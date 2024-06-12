@@ -1,0 +1,58 @@
+.plv-mp-menubar-wrap {
+  font-size: 0;
+  text-align: left;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  background: #ffffff;
+  border-bottom: 1rpx solid #F3F3F3;
+  height: 120rpx;
+}
+.plv-mp-menubar-item {
+    line-height: 120rpx;
+    height: 100%;
+  font-size: 32rpx;
+  color: #333333;
+  letter-spacing: 0;
+  padding: 0 10rpx;
+  overflow: hidden;
+  font-weight: bold;
+}
+.plv-mp-menubar-item__on {
+  color: #333333;
+  font-weight: bold;
+  
+}
+.plv-mp-menubar-wrap__less {
+  display: flex;
+  justify-content: center;
+}
+.plv-mp-menubar-wrap__less > .plv-mp-menubar-item {
+  flex-grow: 1;
+  text-align: center;
+}
+.plv-mp-menubar-wrap__less .plv-mp-quiz__tips {
+  position: relative;
+}
+.plv-mp-menubar-wrap__less .plv-mp-quiz__tips:after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #f24453;
+  border-radius: 4px;
+  top: 16px;
+  margin-left: 4px;
+}
+.plv-mp-skin__white {
+  box-shadow: 0 10rpx 20rpx 0 rgba(4, 0, 0, 0.15);
+}
+.plv-mp-skin__white > .plv-mp-menubar-item {
+  color: #212121;
+  background: #fff;
+}
+.plv-mp-skin__white > .plv-mp-menubar-item__on {
+  color: #009aff;
+}

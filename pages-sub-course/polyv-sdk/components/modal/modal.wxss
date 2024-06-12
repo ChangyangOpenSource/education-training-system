@@ -1,0 +1,1 @@
+.plv-mp-modal-wrap{position:relative;display:none;width:100%;height:100%}.plv-mp-modal-box{position:absolute;width:240rpx;height:256rpx;top:0;left:0;bottom:0;right:0;margin:auto;text-align:center;background-color:#fff;border-radius:16rpx}.plv-mp-modal__img{width:120rpx;height:120rpx;padding-top:40rpx}.plv-mp-modal__text{padding:20rpx 0 34rpx;color:#000}.show{display:block}

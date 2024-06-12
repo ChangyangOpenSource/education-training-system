@@ -1,0 +1,6 @@
+<view class="plv-mp-modal-wrap {{ showing }}">
+  <view class="plv-mp-modal-box">
+    <image class="plv-mp-modal__img" src="{{ imgSrc }}"></image>
+    <view class="plv-mp-modal__text">{{ modalText }}</view>
+  </view>
+</view>

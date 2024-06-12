@@ -1,0 +1,609 @@
+{
+	"lazyCodeLoading": "requiredComponents",
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"preloadRule": {
+		"pages/webView/webView": {
+			"network": "all",
+			"packages": ["pages-learn"]
+		}
+	},
+
+	"pages": [{
+			"path": "pages/index/home",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/mobilePhone/mobilePhone",
+			"style": {
+				"navigationBarTitleText": "绑定手机号",
+				"navigationStyle": "default",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		}, {
+			"path": "pages/webView/webView",
+			"style": {
+				"navigationBarTitleText": "直播1",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#ffffff",
+				"backgroundTextStyle": "light"
+			}
+		}, {
+			"path": "pages/webView1/webView",
+			"style": {
+				"navigationBarTitleText": "直播",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#ffffff",
+				"backgroundTextStyle": "light"
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "default",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},
+
+		{
+			"path": "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
+			"style": {
+				"navigationBarTitleText": "头像裁剪",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		},
+		{
+			"path": "pages/videoRoom/videoRoom",
+			"style": {
+				"navigationBarTitleText": "视频",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#ffffff",
+				"usingComponents": {
+					//#ifdef MP-WEIXIN
+					// "polyv-player": "plugin://polyv-player/player"
+					//#endif
+
+				}
+			}
+		}
+	],
+
+	"requiredPrivateInfos": [
+		"chooseLocation",
+		"chooseAddress"
+	],
+
+	"subPackages": [{
+			"root": "pages-sub-course",
+			"pages": [{
+				"path": "live-play/index",
+				"style": {
+					"usingComponents": {
+						// "plv": "../polyv-sdk/plv/plv",
+						// "polyv": "../polyv-sdk/components/polyv/polyv",
+						// "ppt": "../polyv-sdk/components/ppt/ppt"
+					}
+				}
+			}]
+		}, {
+			"root": "pagesA",
+			"pages": [{
+					"path": "major/index",
+					"style": {
+						"navigationBarTitleText": "专业选择"
+					}
+				}, {
+					"path": "tuijian/index",
+					"style": {
+						"navigationBarTitleText": "推荐",
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff",
+						"onReachBottomDistance": 100 //距离底部150上滑有效
+					}
+				}, {
+					"path": "setUpMajor/setUpMajor2",
+					"style": {
+						"navigationBarTitleText": "专业选择",
+						"navigationStyle": "default",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff"
+					}
+				},
+				{
+					"path": "phone/phone",
+					"style": {
+						"navigationBarTitleText": "绑定手机号",
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff"
+					}
+				},
+
+				{
+					"path": "nav/cuoti/cuoti",
+					"style": {
+						"navigationBarTitleText": "我的错题",
+						"enablePullDownRefresh": false,
+						"navigationStyle": "custom"
+					}
+
+				}, {
+					"path": "nav/shoucang/shoucang",
+					"style": {
+						"navigationBarTitleText": "我的收藏",
+						"enablePullDownRefresh": false,
+						"navigationStyle": "custom"
+					}
+
+				}, {
+					"path": "nav/biji/biji",
+					"style": {
+						"navigationBarTitleText": "我的笔记",
+						"enablePullDownRefresh": false, // 开启下拉刷新
+						"navigationStyle": "custom"
+					}
+
+				},
+				{
+					"path": "nav/mokao/mokao",
+					"style": {
+						"navigationBarTitleText": "模考小程序导航页",
+						"enablePullDownRefresh": false,
+						"navigationStyle": "custom"
+					}
+
+				},
+				{
+					"path": "nav/statisticalReport/statisticalReport",
+					"style": {
+						"navigationBarTitleText": "统计报告",
+						"enablePullDownRefresh": false
+						// "navigationStyle": "custom"
+					}
+
+				},
+				{
+					"path": "nav/aiQuestionGroup/aiQuestionGroup",
+					"style": {
+						"navigationBarTitleText": "智能组题",
+						"enablePullDownRefresh": false,
+						"navigationStyle": "custom"
+					}
+
+				},
+				{
+					"path": "nav/lnzt/lnzt",
+					"style": {
+						"navigationBarTitleText": "历年真题",
+						"enablePullDownRefresh": false,
+						"navigationStyle": "custom"
+					}
+
+				},
+				{
+					"path": "nav/bannerInfo/bannerInfo",
+					"style": {
+						"navigationBarTitleText": "轮播图详情",
+						"enablePullDownRefresh": false,
+						"navigationStyle": "custom"
+					}
+
+				}, {
+					"path": "nav/bannerInfo/xiangqiang",
+					"style": {
+						"navigationBarTitleText": "协议",
+						"enablePullDownRefresh": false,
+						"navigationStyle": "custom"
+					}
+
+				}, {
+					"path": "highEndCourse/highEndCourse",
+					"style": {
+						"navigationBarTitleText": "活动详情",
+						"navigationStyle": "default",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff"
+					}
+				}, {
+					"path": "videoRoom/videoRoom",
+					"style": {
+						"navigationBarTitleText": "学习资料",
+						"navigationStyle": "default",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff",
+						"usingComponents": {
+							//#ifdef MP-WEIXIN
+							// "polyv-player": "plugin://polyv-player/player"
+							//#endif
+						}
+					}
+
+				},
+				{
+					"path": "graphic/graphic",
+					"style": {
+						"navigationBarTitleText": "资讯详情",
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff"
+
+					}
+
+
+
+				}, {
+					"path": "tuiguangdashi/tuiguang",
+					"style": {
+						"navigationBarTitleText": "推广大使",
+						"navigationStyle": "default",
+						"navigationBarBackgroundColor": "#ffffff",
+						"navigationBarTextStyle": "black"
+					}
+				},
+				{
+					"path": "tuiguan/index",
+					"style": {
+						"navigationBarTitleText": "推广大使",
+						"navigationStyle": "default",
+						"navigationBarBackgroundColor": "#ffffff",
+						"navigationBarTextStyle": "black"
+					}
+				}, {
+					"path": "team/index",
+					"style": {
+						"navigationBarTitleText": "团队业绩",
+						"navigationBarBackgroundColor": "#ffffff",
+						"navigationStyle": "default",
+						"enablePullDownRefresh": true,
+						"navigationBarTextStyle": "black",
+						"onReachBottomDistance": 100 //距离底部150上滑有效
+					}
+				}, {
+					"path": "shenqing/index",
+					"style": {
+						"navigationBarTitleText": "推广大使",
+						"navigationBarTextStyle": "black",
+						"navigationStyle": "custom"
+					}
+				}, {
+					"path": "withdrawal/index",
+					"style": {
+						"navigationBarTitleText": "提现",
+						"navigationBarBackgroundColor": "#ffffff",
+						"navigationBarTextStyle": "black",
+						"enablePullDownRefresh": true,
+						"navigationStyle": "default",
+						"onReachBottomDistance": 100 //距离底部150上滑有效
+					}
+				},
+				{
+					"path": "orders/index",
+					"style": {
+						"navigationBarTitleText": "分销订单",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff",
+						"enablePullDownRefresh": true,
+						"navigationStyle": "default",
+						"onReachBottomDistance": 100 //距离底部150上滑有效
+					}
+				}, {
+					"path": "Distribution/index",
+					"style": {
+						"navigationBarTitleText": "分销员",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff",
+						"enablePullDownRefresh": true,
+						"navigationStyle": "default",
+						"onReachBottomDistance": 100 //距离底部150上滑有效
+					}
+				},
+				{
+					"path": "bankCard/index",
+					"style": {
+						"navigationBarTitleText": "填写银行卡信息",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff",
+						"enablePullDownRefresh": true,
+						"navigationStyle": "default"
+						// "onReachBottomDistance": 100 //距离底部150上滑有效
+					}
+				},
+				{
+					"path": "customer/index",
+					"style": {
+						"navigationBarTitleText": "客户",
+						"navigationBarBackgroundColor": "#ffffff",
+						"navigationBarTextStyle": "black",
+						"navigationStyle": "default",
+						"enablePullDownRefresh": true,
+						"onReachBottomDistance": 100 //距离底部150上滑有效
+					}
+				},
+				{
+					"path": "orderDetail/orderDetail",
+					"style": {
+						"navigationBarTitleText": "订单详情",
+						"navigationBarTitleText": "",
+						"enablePullDownRefresh": false
+					}
+
+				}, {
+					"path": "setUpMajor/setUpMajor",
+					"style": {
+						"navigationBarTitleText": "专业选择",
+						"navigationStyle": "default",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff"
+					}
+				},
+				{
+					"path": "setUpMajor/setUpZhu",
+					"style": {
+						"navigationBarTitleText": "专业选择",
+						"navigationStyle": "default",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff"
+					}
+				},
+				{
+					"path": "index/index",
+					"style": {
+						"navigationBarTitleText": "温度计划",
+						"navigationStyle": "default",
+						"navigationBarTextStyle": "black",
+						"enablePullDownRefresh": false,
+						"navigationBarBackgroundColor": "#ffffff"
+					}
+				},
+				{
+					"path": "fenxiang/fenxiang",
+					"style": {
+						"navigationBarTitleText": "温度计划",
+						"navigationStyle": "default",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff"
+					}
+				},
+				{
+					"path": "zhuxue/zhuxue",
+					"style": {
+						"navigationBarTitleText": "温度计划",
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff"
+					}
+				},
+				{
+					"path": "curriculumDetail/index",
+					"style": {
+						"navigationBarTitleText": "班级详情",
+						"navigationStyle": "default",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff",
+						"app-plus": {
+							"titleNView": false
+						}
+					}
+				}, {
+					"path": "payOrder/payOrder",
+					"style": {
+						"navigationBarTitleText": "课程订单",
+						"enablePullDownRefresh": false,
+						"navigationBarTextStyle": "black",
+						"navigationStyle": "default",
+						"navigationBarBackgroundColor": "#ffffff"
+
+					}
+
+				}, {
+					"path": "audit-course-list/index",
+					"style": {
+						"navigationBarTitleText": "试听课程"
+					}
+				}, {
+					"path": "audit-live-list/index",
+					"style": {
+						"navigationBarTitleText": "试听在线"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages-mine",
+			"pages": [ {
+				"path": "courseOrder/courseOrder",
+				"style": {
+					"enablePullDownRefresh": false,
+					"navigationBarTitleText": "课程订单",
+					"navigationStyle": "default",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "webLink/webLink",
+				"style": {
+					"enablePullDownRefresh": false,
+					"navigationBarTitleText": "",
+					"navigationStyle": "default",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "exchangeRecords/index",
+				"style": {
+					"enablePullDownRefresh": false,
+					"navigationBarTitleText": "兑换列表",
+					"navigationStyle": "default",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}, {
+				"path": "vip/vip",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "about/about",
+				"style": {
+					"navigationBarTitleText": "关于我们",
+					"enablePullDownRefresh": false,
+					"backgroundColor": "#ffffff",
+					"navigationStyle": "default",
+					"navigationBarBackgroundColor": "#ffffff",
+					"navigationBarTextStyle": "black"
+				}
+
+			}, {
+				"path": "aboutUs/aboutUs",
+				"style": {
+					"navigationBarTitleText": "关于我们",
+					"enablePullDownRefresh": false,
+					"backgroundColor": "#ffffff",
+					"navigationStyle": "default",
+					"navigationBarBackgroundColor": "#ffffff",
+					"navigationBarTextStyle": "black"
+				}
+
+			}, {
+				"path": "feedback/feedback",
+				"style": {
+					"navigationBarTitleText": "意见反馈",
+					"enablePullDownRefresh": false,
+					"navigationStyle": "default",
+					"navigationBarBackgroundColor": "#ffffff",
+					"navigationBarTextStyle": "black"
+				}
+
+			}, {
+				"path": "receivingAddress/receivingAddress",
+				"style": {
+					"navigationBarTitleText": "收货地址",
+					"enablePullDownRefresh": false,
+					"navigationStyle": "default",
+					"navigationBarBackgroundColor": "#ffffff",
+					"navigationBarTextStyle": "black"
+				}
+
+			}, {
+				"path": "receivingAddress/editAddress/editAddress",
+				"style": {
+					"navigationBarTitleText": "收货地址",
+					"enablePullDownRefresh": false,
+					"navigationStyle": "default",
+					"navigationBarBackgroundColor": "#ffffff",
+					"navigationBarTextStyle": "black"
+				}
+
+			}, {
+				"path": "contact/contact",
+				"style": {
+					"enablePullDownRefresh": false,
+					"navigationBarTitleText": "立即咨询",
+					"navigationStyle": "default",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+
+			}]
+		},
+
+		{
+			"root": "pagesB",
+			"pages": [{
+					"path": "answerSheet/answerSheet",
+					"style": {
+						"navigationBarTitleText": "答题卡",
+						"navigationStyle": "custom"
+					}
+				}, {
+					"path": "answerSheet/answerSheet_tourist",
+					"style": {
+						"navigationBarTitleText": "答题卡",
+						"navigationStyle": "custom"
+					}
+				}, {
+					"path": "parsing/index",
+					"style": {
+						"navigationBarTitleText": "答题",
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff"
+					}
+				}, {
+					"path": "parsing/index_tourist",
+					"style": {
+						"navigationBarTitleText": "答题",
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#ffffff"
+					}
+				}, {
+					"path": "end/index",
+					"style": {
+						"navigationBarTitleText": "答题结果",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "end/ctx",
+					"style": {
+						"navigationBarTitleText": "答题结果"
+					}
+				},
+				{
+					"path": "sheet/index",
+					"style": {
+						"navigationBarTitleText": "答题卡"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages-learn",
+			"pages": [{
+				"path": "courseDetail/courseDetail",
+				"style": {
+					"enablePullDownRefresh": false,
+					"navigationBarTitleText": "课程详情",
+					"navigationStyle": "default",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#ffffff"
+				}
+			}]
+		}
+	],
+	"globalStyle": {
+		"usingComponents": {
+			// "plv": "@/pages-sub-course/polyv-sdk/plv/plv",
+			// "polyv": "@/pages-sub-course/polyv-sdk/components/polyv/polyv",
+			// "ppt": "@/pages-sub-course/polyv-sdk/components/ppt/ppt"
+		},
+		"mp-alipay": {
+			"transparentTitle": "always",
+			"allowsBounceVertical": "NO"
+		},
+		"app-plus": {
+			"titleNView": false,
+			"animationType": "slide-in-bottom"
+		},
+		"navigationStyle": "custom"
+	},
+	"usingComponts": true,
+	"serviceProviderTicket": "ozwD7Ja3Keej6APsyUPeW2jgLo5j70c0t6PEjSVZQnhYjpKXFO3LYor9HNWiGwfV1tU+fYELEIMnkAbJwdMPZnyEZpi/oTrOUCs="
+}

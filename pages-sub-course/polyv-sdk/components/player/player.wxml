@@ -1,0 +1,55 @@
+<view class="plv-player">
+  <!-- 在线播放器 -->
+  <plv-live-player
+    id="plv-live-player"
+    wx:if="{{ mode === 'live' }}"
+    skin="{{ skin }}"
+    id="plvLivePlayerComp"
+    videoOption="{{ videoOption }}"
+    menuType="{{ menuType }}"
+    isSwitched="{{ isSwitched }}"
+    usePlayerSkin="{{ usePlayerSkin }}"
+    allowDanmu="{{ allowDanmu }}"
+    skinAlwaysShow="{{ skinAlwaysShow }}"
+    bind:onLiveStorageProgress="onLiveStorageProgress"
+    bind:onLiveVodEnd="onLiveVodEnd"
+    bind:onLiveStatusChange="onLiveStatusChange"/>
+  <!-- 点播播放器 -->
+  <view class="plv-mp-vod-player-box" wx:else>
+    <video
+      class="plv-mp-vod-player-box-video"
+      id="plvVodPlayer"
+      src="{{ vodSrc }}"
+      muted="{{ muted }}"
+      autoplay
+      enable-danmu="{{ true }}"
+      object-fit="contain"
+      bindtap="showSetControl"
+      bindtimeupdate="onVodTimeUpdate"
+      bindplay="onVodPlay"
+      bindpause="onVodPause"
+      bindwaiting="onVodWaiting"
+      bindended="onVodEnded"
+      binderror="onVodError">
+      <cover-image wx:if="{{ isCamClosed === 1 }}" src="https://playertest.polyv.net/player2/test/nong/nocamera_ppt.jpg"></cover-image>
+      <cover-image bindtap="setting" wx:if="{{ usePlayerSkin && showSettingBtn }}" class="plv-control-setting-playback" src="../../assets/images/setting.png"></cover-image>
+      <cover-view class="plv-control-setting-content" bindtap="hideSettingContent" wx:if="{{ settingShow }}">
+        <cover-view class="plv-setting-head">
+          <cover-view class="head-item" bindtap="danmuSwitch">
+            <cover-image class="setting-content__image" src="../../assets/images/{{ danmuEnabled ? 'selected' : 'unselect' }}.png"></cover-image>
+            <button class="setting-content__btn">弹幕</button>
+          </cover-view>
+        </cover-view>
+        <cover-view class="plv-control-setting-detail control-rate">
+          <cover-view class="setting-detail-item">倍速</cover-view>
+          <cover-view
+            wx:for="{{ ['0.5x', '1.0x', '1.25x', '1.5x', '2.0'] }}"
+            wx:key="index"
+            bindtap="changeRate"
+            data-index="{{ index }}"
+            class="setting-item-btn setting-btn-rate {{ currentRate === index ? 'btn-selected' : '' }}">{{ item }}</cover-view>
+        </cover-view>
+      </cover-view>
+    </video>
+  </view>
+</view>

@@ -1,0 +1,22 @@
+<view class="plv-ppt plv-mp-skin__{{ skin }}" style="width:{{width}}rpx;height:{{height}}rpx">
+  <view id="plvPPTDom" class="plv-ppt-dom">
+    <image src="{{imgUrl}}" class="plv-ppt-dom-img" mode="aspectFit" bindload='handleImgLoad'></image>
+    <view id="plvPPTDomLoad" class="plv-ppt-dom-load" style="display:{{isLoading?'block':'none'}}">
+      <view class="line-spin-fade-loader">
+        <view class="line-spin-fade-laoder__view"></view>
+        <view class="line-spin-fade-laoder__view"></view>
+        <view class="line-spin-fade-laoder__view"></view>
+        <view class="line-spin-fade-laoder__view"></view>
+        <view class="line-spin-fade-laoder__view"></view>
+        <view class="line-spin-fade-laoder__view"></view>
+        <view class="line-spin-fade-laoder__view"></view>
+        <view class="line-spin-fade-laoder__view"></view>
+      </view>
+    </view>
+    <canvas class="plv-ppt-dom-paint" canvas-id="paintbrush" style="{{canvasStyle}}{{isBoard?'background:#fff;':''}}" id="paintbrush"></canvas>
+    <view style="{{canvasStyle}}">
+      <image src="../../assets/images/draw-laser.png" class="plv-ppt-dom-laser" hidden="{{!showLaser}}" style="left:{{laserStyle.x-5}}px;top:{{laserStyle.y-5}}px;"></image>
+    </view>
+  </view>
+  <!-- <view style="position:absolute;top:0;left:0;height:100%;width:30%;color:red;">{{log}}</view> -->
+</view>

@@ -1,0 +1,152 @@
+<view
+  class="plv-mp-answer-card-wrap {{ isShow ? 'show' : '' }}">
+  <!-- 问答选项，结果面板 -->
+  <view wx:if="{{ status === 'option' || status === 'result' || status === 'score_result' }}"
+        class="plv-mp-answer-card-question">
+    <view class="plv-mp-answer-card-question__top">
+    <!-- 返回按钮 -->
+      <image 
+        class="plv-mp-answer-card-question__top__back"
+        src="../../assets/images/icon-back.png"
+        wx:if="{{status === 'result' && !showResultTip && !isVote && !isScore}}"
+        bindtap="handleClickBack"
+      ></image>
+      <text class="plv-mp-answer-card-question__top__text">{{ title }}</text>
+      <!-- 关闭按钮 -->
+      <image
+        bindtap="closePanel"
+        class="plv-mp-answer-card-question__top__close"
+        src="../../assets/images/interact-btn-close.png"></image>
+    </view>
+    <view class="plv-mp-answer-card-question__middle" wx:if="{{!(status === 'result' && showResultTip && !isVote && status !== 'score_result')}}">
+      <!-- 答题卡 -->
+      <scroll-view wx:if="{{ itemType === 0 }}" scroll-y style="{{ questionScrollH }}">
+        <view class="plv-mp-answer-card-question__middle__wrap" wx:if="{{status !== 'score_result'}}">
+          <text class="plv-mp-answer-card-question__middle__title">{{ answersContent }}</text>
+          <text class="plv-mp-answer-card-question__middle__multiTips">{{ multiContent }}</text>
+          <view>
+            <block wx:for="{{ answersOption }}">
+              <!-- 问答 -->
+              <view class="plv-mp-answer-card-choice">
+                <view
+                  id="{{ item.index }}"
+                  data-index="{{ item.index }}"
+                  data-letter="{{ item.letter }}"
+                  bindtap="choiceTap"
+                  class="plv-mp-answer-card-question__middle__choice {{ isVote ? '' : item.style }}"
+                >
+                  <view wx:if="{{isVote && status==='result'}}" class="plv-mp-answer-card-question__middle__choice__vote" style="width:{{voteResult[item.index]}}%"></view>
+                  <view wx:if="{{isVote && status==='result'}}" class="plv-mp-answer-card-question__middle__choice__num"><view class="plv-mp-answer-card-question__middle__choice__num__text">{{singleResult[item.index]}}</view>人</view>
+                  <view class="plv-mp-answer-card-question__middle__choice__text">{{ item.choice }}{{isScore&&item.tips?(' ('+item.tips+')'):''}}</view>
+                </view>
+                <image wx:if="{{!isVote && !!item.choiceClass}}" class="plv-mp-answer-card-choice-icon" src="../../assets/images/icon-{{item.choiceClass}}.png"></image>
+              </view>
+            </block>
+          </view>
+        </view>
+        <view wx:else class="plv-mp-answer-card-score">
+          <image class="plv-mp-answer-card-score__icon" src="../../assets/images/icon-tip.png"></image>
+          <view class="plv-mp-answer-card-score__tip">评分已截止</view>
+          <view class="plv-mp-answer-card-score__title">{{scoreContent}}</view>
+          <view class="plv-mp-answer-card-score__score">平均得分<view class="plv-mp-answer-card-score__score__num">{{averageNum}}</view>分</view>
+        </view>
+      </scroll-view>
+      <!-- 快速问答 -->
+      <view wx:else class="plv-mp-answer-card-question__middle__quick">
+        <block wx:for="{{ answersOption }}">
+          <view
+            id="{{ item.index }}"
+            data-index="{{ item.index }}"
+            data-letter="{{ item.letter }}"
+            bindtap="choiceTap"
+            class="plv-mp-answer-card-question__middle__quick__choice {{ item.style }}">
+            {{ item.letter }}
+          </view>
+        </block>
+      </view>
+    </view>
+    <view 
+      wx:else
+      class="plv-mp-answer-card-question-result-tip"
+    >
+      <image
+        class="plv-mp-answer-card-question-result-tip__icon"
+        src="../../assets/images/icon-{{answerResult.icon}}.png"
+      ></image>
+      <view
+        class="plv-mp-answer-card-question-result-tip__tip"
+      >
+        {{answerResult.tip}}
+      </view>
+      <view 
+        class="plv-mp-answer-card-question-result-tip__btn"
+        bindtap="checkResult"
+      >
+        查看答案
+      </view>
+    </view>
+    <!-- 提交按钮 -->
+    <view
+      wx:if="{{ status === 'option' || status === 'score_result' }}"
+      class="plv-mp-answer-card-question__bottom {{ hasChoice? 'active' : '' }}">
+      <view
+        bindtap="submitTap"
+        class="plv-mp-answer-card-question__bottom__btn">
+        {{ submit }}
+        <view wx:if="{{!!duration && status !== 'score_result'}}" class="plv-mp-answer-card-question__bottom__btn__duration">
+          <image
+            class="plv-mp-answer-card-question__bottom__btn__duration__icon"
+            src="../../assets/images/icon-duration.png"
+          ></image>
+          <view class="plv-mp-answer-card-question__bottom__btn__duration__time">{{duration}}s</view>
+        </view>
+        
+      </view>
+      
+    </view>
+  </view>
+  <!-- 评分结果 -->
+  <!-- <view
+    wx:if="{{ status === 'score_result' }}"
+    class="plv-mp-answer-card-score">
+    <view class="plv-mp-answer-card-score__top ">
+      <image
+        bindtap="closePanel"
+        class="plv-mp-answer-card-score__top__close"
+        src="../../assets/images/interact-btn-close.png"></image>
+    </view>
+    <view class="plv-mp-answer-card-score__middle">
+      <scroll-view>
+        <view class="plv-mp-answer-card-score__middle__wrap">
+          <text class="plv-mp-answer-card-score__middle__title">{{ scoreContent }}</text>
+        </view>
+        <view class="plv-mp-answer-card-score__middle__average">
+          <view class="plv-mp-answer-card-score__middle__average__content">
+            <view class="plv-mp-answer-card-score__middle__average__triangle"></view>
+            <view class="plv-mp-answer-card-score__middle__average__line"></view>
+            <view class="plv-mp-answer-card-score__middle__average__text">{{ average }}</view>
+            <view class="plv-mp-answer-card-score__middle__average__line"></view>
+          </view>
+          <view class="plv-mp-answer-card-score__middle__average__score">
+            <view class="plv-mp-answer-card-score__middle__average__score__int score">
+              {{ integer }}
+            </view>
+            <view class="plv-mp-answer-card-score__middle__average__score__point score">
+              {{ decimalPoint }}
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view> -->
+</view>
+ <!-- 提交提示弹窗 -->
+<!-- 截止提示弹窗 -->
+<view wx:if="{{ status === 'submit' || status === 'cut_off' }}">
+  <modal
+    id="answerModal"
+    class="plv-mp-answer-card-modal"
+    modalData="{{ modalData }}"
+    bind:onModalHide="onModalHide">
+  </modal>
+</view>

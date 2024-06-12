@@ -1,0 +1,62 @@
+<view
+class="plv-mp-chat-edit-wrap {{ showMore }} plv-mp-skin__{{ skin }}"
+style="{{ iPhoneX ? 'bottom: 32px' : '0' }}">
+  <view class="plv-mp-chat-edit-input">
+    <view class="plv-mp-chat-edit-input-left">
+      <image bindtap="tapEmoji" class="plv-mp-chat-edit-input__icon" src="../../assets/images/{{ skin }}/chatroom-icon-emoji.png" />
+    </view>
+    <input bindinput="chatInputChange"
+           value="{{ chatTitle }}"
+           class="plv-mp-chat-edit-ipt"
+           placeholder="我也来聊几句..."
+           maxlength="200" />
+    <view class="plv-mp-chat-edit-input-right">
+      <image
+        wx:if="{{ !chatTitle.length && !isAsk }}"
+        bindtap="tapMore"
+        class="plv-mp-chat-edit-input__icon plv-mp-chat-edit-input__add"
+        src="../../assets/images/{{skin}}/{{ showMore ? 'chatroom-icon-keyboard.png' : 'chatroom-icon-more.png' }}"
+      />
+      <view wx:else bindtap="tapSend" class="plv-mp-send-btn">发送</view>
+    </view>
+  </view>
+  <view class="plv-mp-chat-edit-more">
+    <view class="plv-mp-emotion-list" wx:if="{{ showEmotionList }}">
+      <view
+        bindtap="tapEmotionIcon"
+        data-title="{{ emotionItem.title }}"
+        class="plv-mp-emotion-item"
+        wx:for="{{ emotionslist }}"
+        wx:for-item="emotionItem"
+        wx:key="url"
+      >
+        <view class="plv-mp-emotion-item__icon" style="background-position: {{ emotionItem.position }}"></view>
+      </view>
+    </view>
+    <view class="plv-mp-chat-edit-plus" wx:if="{{ showMore }}">
+      <view bindtap="tapOnlyHost" class="plv-mp-chat-edit-plus-item">
+        <image
+          class="plv-mp-chat-edit-host-icon"
+          src="{{ isOnlyHost ? '../../assets/images/more-icon-host.png' : '../../assets/images/more-icon-host-off.png' }}"
+        />
+        <text class="plv-mp-chat-edit-host-title">{{ isOnlyHost ? '查看全部' : '只看主持人' }}</text>
+      </view>
+      <view wx:if="{{ showSendImg }}" class="plv-mp-chat-edit-plus-item">
+        <image
+          class="plv-mp-chat-edit-host-icon"
+          src="../../assets/images/more-icon-host.png"
+        />
+        <text class="plv-mp-chat-edit-host-title">发送图片</text>
+      </view>
+      <!-- <view wx:if="{{ showBulletin }}" bindtap="tapBulletin" class="plv-mp-chat-edit-plus-item"> -->
+      <!-- 产品说公告按钮一直显示。保留代码，以防产品变卦 -->
+      <view bindtap="tapBulletin" class="plv-mp-chat-edit-plus-item">
+        <image
+          class="plv-mp-chat-edit-host-icon"
+          src="../../assets/images/more-bulletin-icon.png"
+        />
+        <text class="plv-mp-chat-edit-host-title">公告</text>
+      </view>
+    </view>
+  </view>
+</view>

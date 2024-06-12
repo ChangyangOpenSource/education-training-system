@@ -1,0 +1,35 @@
+<view class="plv-mp-live-introduction-wrap plv-mp-skin__{{ skin }}">
+  <scroll-view scroll-y>
+    <view class="plv-mp-live-introduction_top">
+      <text class="plv-mp-live-introduction_top_channel_title">{{ channelDetail.name }}</text>
+      <view class="plv-mp-live-introduction_top_channel_info">
+        <image class="plv-mp-live-introduction_top_channel_logo" src="{{ channelDetail.coverImage }}"/>
+        <text class="plv-mp-live-introduction_top_channel_host">{{ channelDetail.publisher }}</text>
+        <view class="plv-mp-live-introduction_top_channel_likes channel-info__view">
+          <image class="plv-mp-live-introduction-icon"
+                 src="../../assets/images/{{ skin }}/desc-icon-likes.png" />
+          {{ channelDetail.likes }}
+        </view>
+        <view class="plv-mp-live-introduction_top_channel_viewers channel-info__view">
+          <image class="plv-mp-live-introduction-icon" 
+                 src="../../assets/images/{{ skin }}/desc-icon-viewers.png" />
+          {{ channelDetail.pageView }}
+        </view>
+      </view>
+    </view>
+    <view class="plv-mp-live-introduction_middle">
+      <view class="plv-mp-live-introduction_middle_live_status">{{ liveStatusText }}</view>
+      <view class="plv-mp-live-introduction_middle_live_time">在线时间：{{ channelDetail.startTime || '' }}</view>
+      <view class="player-countdown" wx:if="{{ showCountDown }}">
+        <view class="countdown-content">
+          <view>距离在线开始还有： <text class="player-days">{{ days }}</text> 天 <text class="player-hours">{{ hours }}</text> 小时 <text class="player-minutes">{{ minutes }}</text> 分 <text class="player-seconds">{{ seconds }}</text> 秒 </view>
+        </view>
+      </view>
+    </view>
+    <view class="plv-mp-live-introduction-bottom">
+      <menu-custom
+        skin="{{ skin }}"
+        parseHtml="{{ channelDetail.desc }}" />
+    </view>
+  </scroll-view>
+</view>

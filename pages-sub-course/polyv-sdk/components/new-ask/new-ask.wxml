@@ -1,0 +1,79 @@
+<view class="plv-mp-ask-wrap plv-mp-skin__{{ skin }}">
+  <scroll-view
+    id="scrollContent"
+    scroll-y
+    style="height: 100%"
+    class="plv-mp-chatroom-scroll-view"
+    scroll-top="{{ scrollToTop }}"
+    bindscrolltoupper="scrollToUpper"
+    bindscrolltolower="scrollToLower"
+    bindscroll="viewScroll">
+    <view id="askContent">
+      <view class="plv-mp-ask__head">
+        <picker bindchange="bindPickerChange" value="{{ pickIndex }}" range="{{ pickList }}">
+          <view class="plv-mp-ask__picker">
+            {{ pickIndex === 0 ? '全部' : pickList[pickIndex] }}
+          </view>
+        </picker>
+      </view>
+      <view
+        class="plv-mp-ask-list"
+        style="{{ showEdit ? 'padding-bottom: 54px' : '' }}"
+        style="{{ showEdit && iPhoneX ? 'padding-bottom: 86px' : '' }}">
+        <view
+          id="QAContent{{ index }}"
+          class="plv-mp-ask-list__item"
+          wx:for="{{ listData }}"
+          wx:key="index"
+          wx:if="{{ !(item.answers.length === 0 && item.question.userId !== userId) }}">
+          <view class="plv-mp-ask-body ask-question">
+            <view class="plv-mp-ask-list__conent">问：
+              <content-parser class="plv-mp-ask-component__content" content="{{ item.question.content }}" />
+            </view>
+            <text class="plv-mp-ask-list__text">{{ item.question.user.nick }}</text>
+            <text class="plv-mp-ask-list__text">提问：{{ item.question.timestamp }}</text>
+            <text
+              wx:if="{{ userId === item.question.userId && item.answers.length > 0 }}"
+            class="plv-mp-ask-list__me">@我</text>
+          </view>
+          <view
+            class="plv-mp-ask-body ask-answer"
+            wx:for="{{ item.answers }}"
+            wx:for-item="i"
+            wx:for-index="idx"
+            id="answer{{ i.id }}"
+            wx:key="id">
+            <view class="plv-mp-ask-list__conent">{{ idx === 0 ? '答' : '追加' }}：
+              <content-parser class="plv-mp-ask-component__content" content="{{ i.content }}" />
+            </view>
+            <text class="plv-mp-ask-list__text">{{ i.user.nick }}</text>
+            <text class="plv-mp-ask-list__text">回复{{ i.timestamp }}</text>
+          </view>
+        </view>
+        <view
+          wx:if="{{ listData.length > 0 && (listData.length < 10 || noMoreMessage) }}"
+          class="plv-mp-ask__empty__answer plv-mp-ask__lower">已经到最底啦~</view>
+        <view
+          class="plv-mp-ask__empty__answer"
+          wx:if="{{ listData.length === 0 }}">暂无数据哦~</view>
+        <view
+          bindtap="chatEditShow"
+          style="{{ iPhoneX ? 'bottom: 96px' : '64px' }}"
+          class="plv-mp-ask-edit {{ liveType === 'end' ? 'edit-end' : '' }}">
+          <image class="plv-mp-ask-edit__img" src="../../assets/images/edit.png" />
+        </view>
+        <button
+          wx:if="{{ showMoreTips }}"
+          bindtap="showReply"
+          class="plv-mp-ask__new__msg">{{ btnTips }}</button>
+      </view>
+    </view>
+  </scroll-view>
+  <chat-edit
+    wx:if="{{ showEdit }}"
+    isAsk="true"
+    skin="{{ skin }}"
+    iPhoneX="{{ iPhoneX }}"
+    bindsengmsg="handleSendMsg"
+  />
+</view>

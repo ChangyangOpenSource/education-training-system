@@ -1,0 +1,1 @@
+export default class{constructor(){this.events={}}on(t,s){if("string"==typeof t&&s instanceof Function)return this.events[t]=this.events[t]||[],this.events[t].push(s),this}emit(t,...s){this.events[t]&&this.events[t].forEach(t=>{t(...s)})}}

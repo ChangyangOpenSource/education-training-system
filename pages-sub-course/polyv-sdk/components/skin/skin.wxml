@@ -1,0 +1,43 @@
+<cover-view class="plv-player-control" wx:if="{{ !settingShow && liveMode !== 2 }}">
+  <cover-image
+    catchtap="changePlayStatus"
+    class="plv-player-control__image plv-control-play-pause"
+    src="../../assets/images/{{ playStatus === 'pause' ? 'play' : 'pause' }}.png"></cover-image>
+  <cover-image class="plv-player-control__image plv-control-refresh" bindtap="refresh" src="../../assets/images/refresh.png"></cover-image>
+  <cover-image
+    class="plv-player-control__image plv-control-screen"
+    bindtap="changeScreen"
+    src="../../assets/images/{{ screenStatus === 'full' ? 'half' : 'full' }}.png"></cover-image>
+  <cover-image bindtap="setting" class="plv-player-control__image plv-control-setting" src="../../assets/images/setting.png"></cover-image>
+</cover-view>
+<cover-image
+    wx:if="{{ liveMode === 2 }}"
+    bindtap="setting"
+    class="plv-control-setting-playback" src="../../assets/images/setting.png"></cover-image>
+<cover-view class="plv-control-setting-content" bindtap="hideSettingContent" wx:if="{{ settingShow }}">
+  <cover-view class="plv-setting-head">
+    <cover-view class="head-item" bindtap="danmuSwitch" wx:if="{{ closeDanmuEnable === 'N' && allowDanmu }}">
+      <cover-image class="plv-setting-head__image plv-control-content__image" src="../../assets/images/{{ danmuEnabled ? 'selected' : 'unselect' }}.png"></cover-image>
+      <button class="plv-control-content__btn">弹幕</button>
+    </cover-view>
+  </cover-view>
+  <cover-view class="plv-control-setting-detail control-rate" wx:if="{{ liveMode !== 1 }}">
+    <cover-view class="setting-detail-item">倍速</cover-view>
+    <cover-view
+      wx:for="{{ ['0.5x', '1.0x', '1.25x', '1.5x', '2.0'] }}"
+      wx:key="index"
+      bindtap="changeRate"
+      data-index="{{ index }}"
+      class="setting-item-btn setting-btn-rate {{ currentRate === index ? 'btn-selected' : '' }}">{{ item }}</cover-view>
+  </cover-view>
+  <cover-view class="plv-control-setting-detail control-line" wx:if="{{ liveMode === 1 }}">
+    <cover-view class="setting-detail-item">线路</cover-view>
+    <cover-view
+      wx:for="{{ lines }}"
+      wx:key="index"
+      bindtap="changeLine"
+      data-line="{{ index }}"
+      data-src="{{ forceVideo ? item.m3u8 : item.flv }}"
+      class="setting-item-btn {{ currentLine === index ? 'btn-selected' : '' }}">线路{{ index + 1 }}</cover-view>
+  </cover-view>
+</cover-view>

@@ -1,0 +1,10 @@
+<!--src/components/my-silder/my-slider.wxml-->
+<view class="progress-box" bindtap="handleClick">
+		<view class="readers-slider">
+			<view
+				class="readers-slider__value"
+				style="width: {{posVal}}%;backgroundColor: {{activeColor}}">
+				<view class="rid-box" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"><view class="dist"></view></view>
+			</view>
+		</view>
+	</view>

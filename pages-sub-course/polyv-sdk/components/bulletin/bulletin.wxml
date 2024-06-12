@@ -1,0 +1,12 @@
+<import src="../../common/wxParse/wxParse.wxml"/> 
+<view style="z-index: {{ zIndex }}" class="plv-mp-bulletin-wrap {{ show ? 'plv-mp-bulletin-wrap__show' : '' }}">
+  <view class="plv-mp-bulletin-top">
+    <text class="plv-mp-bulletin-title">公告</text>
+    <image class="plv-bulletion-top__img" bindtap="tapClose" src="../../assets/images/bulletin-close-btn.png" />
+  </view>
+  <!-- <view class="plv-mp-bulletin-content">{{ content }}</view> -->
+  <view class="plv-mp-bulletin-content"><template is="wxParse" data="{{ wxParseData:content.nodes }}"/></view>
+  <view class="plv-mp-bulletin-bottom">
+    <button bindtap="tapClose" class="plv-mp-bulletin-know-btn">知道了</button>
+  </view>
+</view>

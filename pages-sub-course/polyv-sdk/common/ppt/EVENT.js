@@ -1,0 +1,1 @@
+export default{CHANGE_IMG_SRC:"changeImgSrc",HIDE_PRE_BTN:"hidePreBtn",HIDE_NEXT_BTN:"changeNextBtn",SHOW_PRE_BTN:"showPreBtn",SHOW_NEXT_BTN:"showNextBtn",SHOW_BOARD:"showBoard",HIDE_BOARD:"hideBoard",PPT_RELOAD:"pptReload",PPT_PAGE_CHANGE:"pptPageChange"};

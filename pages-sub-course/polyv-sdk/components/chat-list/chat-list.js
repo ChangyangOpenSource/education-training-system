@@ -1,0 +1,1 @@
+Component({externalClasses:["polyv-chat-list"],properties:{chatList:{type:Array,value:[]},hasMore:{type:Boolean,value:!1},isOnlyHost:{type:Boolean,value:!1},skin:{type:String,value:"black",observer(e){"black"!==e&&"white"!==e&&this.setData({skin:"black"})}}},methods:{tapSeeMore(){this.triggerEvent("seemore")}}});

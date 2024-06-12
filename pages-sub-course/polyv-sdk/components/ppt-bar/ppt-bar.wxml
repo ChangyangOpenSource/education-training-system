@@ -1,0 +1,16 @@
+<view id="pptH5SettingNav" class="{{isVer?'ppt-h5-setting-nav-right':'ppt-h5-setting-nav'}} ppt-h5-setting-nav-mobile ppt-h5-setting-nav-mobile-bottom" hidden="{{!showBar}}" bindtap="resetTimer">
+  <view class="ppt-h5-setting-nav__ul">
+    <view class="ppt-h5-setting-nav__li ppt-h5-setting-nav__prev" data-type="gotoPreviousStep" id="ppt-btn-prev" bindtap="handleClickPrevBtn">
+      <image src="../../assets/images/m-btn-upage{{disabeldPrevBtn?'-un':''}}.png" class="ppt-h5-setting-nav__li__icon"></image>
+    </view>
+    <view class="ppt-h5-setting-nav__li ppt-h5-setting-nav__next" data-type="gotoNextStep" id="ppt-btn-next" bindtap="handleClickNextBtn">
+      <image src="../../assets/images/m-btn-dpage{{disabeldNextBtn ? '-un' : ''}}.png" class="ppt-h5-setting-nav__li__icon"></image>
+    </view>
+    <view class="ppt-h5-setting-nav__li ppt-h5-setting-nav__back-page" id="pptBtnBack" bindtap="handleClickBackPageBtn">
+      <view class="ppt-h5-setting-nav__back-page__num" data-type="pptBtnBack">{{currentPPTPage+1}}</view>
+    </view>
+    <view class="ppt-h5-setting-nav__li ppt-h5-setting-nav__full" data-type="full" bindtap="handleClickFullScreen">
+      <image src="../../assets/images/{{inFullScreen ? 'm-btn-fscreen-un' : 'm-btn-fscreen'}}.png" class="ppt-h5-setting-nav__li__icon"></image>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,175 @@
+<view
+  wx:if="{{ !isBanned }}"
+  class="plv-mp-watch-page {{ iPhoneX ? 'plv-mp-watch-page__x' : '' }} {{ isPPTNormal ? 'plv-mp-watch-page__ppt' : ''}}"
+  style="width: {{ windowSize.width }}px; height: {{ windowSize.height }}px"
+>
+  <view class="plv-mp-watch-top {{ isSwitched ? 'plv-mp-watch_switch' : '' }}">
+    <view class="plv-mp-watch__player" style="z-index: {{ !isSwitched || curMenuData.menuType === MENU_TYPE.DOC ? 1001 : -1 }}">
+      <!-- 播放器 -->
+      <player wx:if="{{ applyData.type !== 'stop' }}"
+              class="plv-mp-watch-player"
+              videoOption="{{ videoOption }}"
+              vodSeek="{{ seekTime }}"
+              skin="{{ watchThemeModel.pageSkin }}"
+              danmuText="{{ danmuText }}"
+              menuType="{{ curMenuData.menuType }}"
+              isSwitched="{{ isSwitched }}"
+              allowDanmu="{{ allowDanmu }}"
+              skinAlwaysShow="{{ skinAlwaysShow }}"
+              usePlayerSkin="{{ usePlayerSkin }}"
+              bind:onLiveStatusChange="playerLiveStatusChange"
+              bind:onLiveStorageProgress="playerLiveStorageProgress"
+              bind:onVodProgress="playerVodProgress"
+              bind:onVodEnd="playerVodEnd"
+              bind:onError="playerError"
+              bind:onLiveVodEnd="playerVodEnd"
+      />
+      <!-- 连麦 -->
+      <concat wx:if="{{ chatInit && channelDetail.status === 'Y' }}"
+              class="plv-mp-concat"
+              channelDetail="{{ channelDetail }}"
+              aspect="{{ aspect }}"
+              applyData="{{ applyData }}"
+              bindrefreshStatus="handleRefreshStatus"
+              bindstop="handleStop"
+              skin="{{ watchThemeModel.pageSkin }}"/>
+    </view>
+    <view class="plv-mp-watch__ppt {{pptInFullScreen ? 'ppt-full-screen' : ''}}"
+      style="z-index:{{ curMenuData.menuType === MENU_TYPE.DOC || isSwitched ? 99 : -1 }}">
+      <view style="display:{{curMenuData.menuType === MENU_TYPE.DOC || isSwitched ?'block':'none'}}" class="plv-ppt-content">
+        <image bindtap="switchPlayPpt" mode="aspectFit"
+          style="z-index: {{ !showSwitch || pptInFullScreen ? -1 : 101 }}"
+          class="plv-mp-btn_switch" src="../../assets/images/change-position.png" />
+        <ppt
+          wx:if="{{ scene === 'ppt' }}"
+          id="plvMpWatchPPT"
+          chatData="{{channelDetail}}"
+          videoId="{{videoId}}"
+          vidCurrentTime="{{vodPlayerProgress}}"
+          pptSize='{{pptSize}}'
+          pptDelayTime='{{pptDelayTime}}'
+          togglePaint='{{ togglePaint }}'
+          skin="{{ watchThemeModel.pageSkin }}"
+          bind:pptPageChange="handlePptPageChange"
+          bindtap="handleClickPPT"
+          requestUrl="{{requestUrl}}"
+        ></ppt>
+        <ppt-bar
+          wx:if="{{ scene === 'ppt' }}"
+          id="plvMpWatchPPTBar"
+          bind:clickFullBtn="handleClickFullBtn"
+          bind:clickPrevBtn="handleClickPrevBtn"
+          bind:clickNextBtn="handleClickNextBtn"
+          bind:clickBackPageBtn="handleClickBackPageBtn"
+          showFullBtn="{{ !isSwitched }}"
+          iPhoneX="{{iPhoneX}}"
+        ></ppt-bar>
+      </view>
+    </view>
+  </view>
+  <view class="plv-mp-watch-content">
+    <view class="plv-mp-watch-content__inner plv-skin-{{ watchThemeModel.pageSkin }}">
+      <view class="plv-mp-watch-middle {{ showConcatApply ? 'plv-mp-watch-middle__concat' : '' }}"
+      style="z-index:{{ pptInFullScreen ? 88 : 99 }}">
+        <menu-bar
+          wx:if="{{ menuList.length }}"
+          class="plv-mp-watch-menu"
+          menuList="{{ menuList }}"
+          skin="{{ watchThemeModel.pageSkin }}"
+          activeIndex="{{ menuIndex }}"
+          wrapWidth="{{ windowSize.width }}"
+          hasNewQuiz="{{ hasNewQuiz }}"
+          plvInsideUse="{{ plvInsideUse }}"
+          bindchangeMenu="handleChangeMenu"></menu-bar>
+          <view
+            class="plv-mp-concat-apply {{ applyData.type === 'apply' ? ''  : 'plv-mp-concat-apply-red'}}"
+            bindtap="handleApply">
+            <view class="plv-concat-apply__view">{{ applyData.txt }}</view>
+          </view>
+      </view>
+      <view class="plv-mp-watch-content__menu">
+
+        <block wx:if="{{ curMenuData.menuType === MENU_TYPE.CHAT }}">
+          <chatroom
+            class="plv-mp-watch-chatroom"
+            showBulletin="{{ hasBulletin }}"
+            skin="{{ watchThemeModel.pageSkin }}"
+            channelDetail="{{ channelDetail }}"
+            bind:onTapBulletin="handleShowBulletin"
+          />
+        </block>
+
+        <block wx:if="{{ curMenuData.menuType === MENU_TYPE.QUIZ }}">
+          <quiz skin="{{ watchThemeModel.pageSkin }}"/>
+        </block>
+
+        <block wx:if="{{ curMenuData.menuType === MENU_TYPE.QA && plvInsideUse }}">
+          <new-ask liveType="{{ liveType }}" skin="{{ watchThemeModel.pageSkin }}" iPhoneX="{{ iPhoneX }}"/>
+        </block>
+
+        <block wx:if="{{ curMenuData.menuType === MENU_TYPE.DESC }}">
+          <live-introduction
+            skin="{{ watchThemeModel.pageSkin }}"
+            liveType="{{ liveType }}"
+            channelDetail="{{ channelDetail }}"/>
+        </block>
+
+        <block wx:if="{{ curMenuData.menuType === MENU_TYPE.TEXT }}">
+          <menu-custom
+            skin="{{ watchThemeModel.pageSkin }}"
+            parseHtml="{{ curMenuData.content }}" />
+        </block>
+
+        <block wx:if="{{ curMenuData.menuType === MENU_TYPE.CHAPTER }}">
+          <chapter
+            bind:onTapChapter="handleChangeChapter"
+            skin="{{ watchThemeModel.pageSkin }}"
+            vodCurTime="{{ vodPlayerProgress }}"
+            chapterList="{{ chapterList }}"
+          />
+        </block>
+
+        <sign-in
+          wx:if="false"
+          bind:onSignShow="handleSignShow"
+        />
+
+      <!-- <block wx:if="{{ curMenuData.menuType === MENU_TYPE.PLAYBACK }}"> -->
+        <play-back
+          class="{{ curMenuData.menuType === MENU_TYPE.PLAYBACK ? '' : 'hide' }}"
+          skin="{{ watchThemeModel.pageSkin }}"
+          playbackList="{{ channelDetail.playbackList }}"
+          nextVod="{{ nextVod }}"
+          liveStatus="{{ channelDetail.status }}"
+          bind:onTapPlayback="handlePlayback"
+        />
+      <!-- </block> -->
+      </view>
+      <!-- 聊天室连接超时提示 -->
+      <view class="plv-mp-watch-chat-overtime" wx:if="{{ chatOvertime }}">
+        <view class="plv-mp-watch-chat-overtime__title">
+          <view>聊天室连接失败</view>
+          <view>请尝试刷新解决</view>
+          <view>如无法解决请联系管理员</view>
+        </view>
+      </view>
+      <!-- 答题卡 -->
+      <answer-card
+        wx:if="{{hasAnswerCard}}"
+        class="plv-mp-watch-answer-card {{ answerShow }}"
+        style="z-index: {{ answerCardIndex }}"
+        answerCardSize="{{ answerCardSize }}"
+        bind:onAnswerCardShow="handleShowAnswerCard" />
+     
+      <!-- 公告 -->
+      <bulletin wx:if="false" show="{{ isShowBulletin }}" bulletinStr="{{ bulletin }}" bind:onClose="handleHideBulletin" zIndex="{{ bulletinIndex }}" />
+
+      <lottery zIndex="{{ lotteryIndex }}" wx:if="{{ plvInsideUse }}" bind:showPptPaint="showPptPaint" />
+      <!-- 问卷 -->
+      <question zIndex="{{ questionIndex }}" bind:showPptPaint="showPptPaint" />
+      <!-- 问卷结果 -->
+      <questionnaire-result  zIndex="{{questionnaireResultZindex}}" bind:showPptPaint="showPptPaint"></questionnaire-result>
+    </view>
+  </view>
+</view>
+<view wx:else class="plv-mp-watch-page plv-mp-watch-page__banned"></view>

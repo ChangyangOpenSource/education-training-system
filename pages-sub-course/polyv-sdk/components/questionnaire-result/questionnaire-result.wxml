@@ -1,0 +1,46 @@
+<!-- pages/questionnaire-result.wxml -->
+<view class="plv-mp-questionnaire-result" style="z-index: {{ zIndex }}" wx:if="{{showPanel && questions.length > 0}}">
+  <view class="plv-mp-questionnaire-result-head">
+    问卷结果
+    <view class="plv-mp-questionnaire-result-head__close" bindtap="closePanel">×</view>
+  </view>
+  <view class="plv-mp-questionnaire-result-body">
+    <view class="plv-mp-questionnaire-result-body__title" wx:if="{{qTitle}}">{{ qTitle }}</view>
+    <view class="plv-mp-questionnaire-result-body__questions">
+      <view class="plv-mp-questionnaire-result-body__questions-item plv-mp-result-question" wx:for="{{questions}}" wx:key="questionId">
+        <view class="plv-mp-result-question__title">
+          {{index + 1}}.【{{item.questionType}}】{{item.name}}
+          <text wx:if="{{item.required === 'Y'}}" class="plv-mp-questionnaire-result__text--required">*</text>
+          <text wx:if="{{item.score}}" class="plv-mp-questionnaire-result__text--blue"> ({{item.score}}分)</text>
+        </view>
+        <view class="plv-mp-result-question-option" wx:if="{{item.type !== 'Q'}}" wx:for="{{item.selectData}}" wx:for-item="optionItem" wx:key="optionIndex">
+          <view class="plv-mp-result-question-option-item {{optionItem.type ? 'plv-mp-result-question-option-item--' + optionItem.type : ''}}">
+            <view class="plv-mp-result-question-option-item__text">{{optionItem.option}}, {{optionItem.optionText}}</view>
+            <image class="plv-mp-result-question-option-item__icon plv-mp-result-question-option-item__icon--wrong" src="../../assets/images/icon-wrong.png" />
+            <image class="plv-mp-result-question-option-item__icon plv-mp-result-question-option-item__icon--correct" src="../../assets/images/icon-right.png" />
+          </view>
+        </view>
+        <block wx:if="{{item.type === 'Q'}}">
+          <view class="plv-mp-result-question__textarea">{{item.answer}}</view>
+        </block>
+        <view class="plv-mp-result-question-detail">
+          <view class="plv-mp-result-question-detail__answer" wx:if="{{item.rightAnswerString}}">
+            正确答案 :
+            <text class="plv-mp-questionnaire-result__text--blue">{{item.rightAnswerString}}</text>
+          </view>
+          <view class="plv-mp-result-question-detail__item" wx:for="{{item.selectData}}" wx:for-item="optionItem"  wx:key="optionIndex">
+            选{{optionItem.option}}的有
+            <text class="{{ (optionItem.isRightAnswer || (!item.rightAnswerString && optionItem.isMyAnswer)) ? 'plv-mp-questionnaire-result__text--blue' : ''}}">{{optionItem.AnswerNum}}</text>
+            人, 占比 {{optionItem.percent}}%
+          </view>
+          <block wx:if="{{item.type === 'Q'}}">
+            共有 <text class="plv-mp-questionnaire-result__text--blue">{{item.total}}</text> 人回答。
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="plv-mp-questionnaire-result-footer">
+    <button class="plv-mp-questionnaire-result-footer__confirm" bindtap="closePanel">我知道了</button>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+<cover-view class="plv-danmu-content">
+ <block wx:for="{{ barrageList }}" wx:key="unique">
+  <cover-view
+    data-index="{{ index }}"
+    style="color:{{item.color}};left:{{item.left}}px;top:{{item.top}}px; "
+    class="plv-danmu-item"
+    animation="{{ animationList[index] }}"
+    >{{item.text}}
+  </cover-view>
+ </block>
+</cover-view>

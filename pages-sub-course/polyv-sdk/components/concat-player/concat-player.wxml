@@ -1,0 +1,34 @@
+<view class="plv-mp-contact-layout plv-mp-skin__{{ skin }} {{ aspect === '9:16' ? 'plv-mp-concat-layout-16-9' : '' }}">
+  <view class="plv-mp-contact-player-list">
+    <view
+      class="plv-mp-contact-player-box {{ camera ? '' : 'plv-mp-contact-player-audio' }} {{ camera && muteVideo ? 'plv-mp-contact-player-box-mute-video' : '' }}"
+      wx:if="pushUrl" style="width:{{widthAndTop.width}}">
+      <live-pusher
+      class="plv-contact__live-pusher"
+      url="{{ pushUrl }}"
+      mode="RTC"
+      aspect="{{ aspect }}"
+      beauty="3"
+      whiteness="3"
+      enable-camera="{{ camera }}"
+      autopush
+      max-bitrate="200"
+      bindstatechange="recorderStateChange"/>
+    </view>
+    <view
+      wx:for="{{ pullUrl }}"
+      wx:key="uid"
+      class="plv-mp-contact-player-box {{ !camera && !item.isTeacher ? 'plv-mp-contact-player-audio' : ''}}"
+      style="width:{{widthAndTop.width}}">
+      <live-player
+        class="plv-contact__live-player"
+        src="{{ item.url }}"
+        mode="RTC"
+        object-fit="fillCrop"
+        autoplay="true" />
+    </view>
+  </view>
+  <view class="plv-mp-contact-layout-resize"
+    style="height:{{resizeHeight}}"
+  ></view>
+</view>

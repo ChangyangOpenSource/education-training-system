@@ -1,0 +1,12 @@
+<view class="plv-mp-video-player-box {{ allowContact ? '' : 'plv-mp-video-player-hide' }}">
+  <concat-player
+    class="plv-mp-concat-player"
+    wx:if="{{ allowContact }}"
+    getChatInstance="{{ getChatInstance }}"
+    initEvent="{{ initEvent }}"
+    camera="{{ camera }}"
+    aspect="{{ aspect }}"
+    bindleave="leave"
+    ref="contact"
+    skin="{{ skin }}"></concat-player>
+</view>
