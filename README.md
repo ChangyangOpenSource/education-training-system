@@ -49,7 +49,7 @@
 
 #### 后端
 
-- 基础框架：Spring Boot 2.6.14
+- 基础框架：Spring Boot 2.6.6
 
 - 微服务框架： Spring Cloud Alibaba 2021.0.1.0
 
