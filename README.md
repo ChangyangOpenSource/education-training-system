@@ -125,7 +125,7 @@ npm run dev
 
 ## 许可证
 
-[License MIT](./License)
+[License MIT](./LICENSE)
 
 ## 联系我们 
 * 如果您想使用功能更完善的教育系统，请联系以下企业微信！
