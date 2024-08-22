@@ -131,4 +131,4 @@ npm run dev
 * 如果您想使用功能更完善的教育系统，请联系以下企业微信！
 * 如果您想基于教育系统进行定制开发，我们提供有偿定制服务支持！
 * 其他合作模式不限，欢迎来撩！
-<img src="https://github.com/ChangyangOpenSource/education-training-system/blob/main/images/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1.jpg" alt="Logo" width="280" height="280">
+<img src="https://github.com/ChangyangOpenSource/education-training-system/blob/main/images/微信名片.png" alt="Logo" width="280" height="280">
