@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/ChangyangOpenSource/education-training-system/">
-    <img src="https://github.com/ChangyangOpenSource/education-training-system/blob/main/images/%E7%95%85%E9%98%B3%E6%95%99%E5%9F%B9%E6%96%87%E5%AD%97logo.png" alt="Logo">
+    <img src="./images/%E7%95%85%E9%98%B3%E6%95%99%E5%9F%B9%E6%96%87%E5%AD%97logo.png" alt="Logo">
   </a>
   <h3 align="center">教育培训行业解决方案</h3>
   <p align="center">
@@ -113,7 +113,7 @@ npm run dev
 
 ### 微信小程序体验版
 
-   ![演示图](https://github.com/ChangyangOpenSource/education-training-system/blob/main/images/%E5%B0%8F%E9%98%B3%E6%95%99%E5%9F%B9%E4%BA%8C%E7%BB%B4%E7%A0%81.jpg "微信小程序演示.png")
+   ![演示图](./images/%E5%B0%8F%E9%98%B3%E6%95%99%E5%9F%B9%E4%BA%8C%E7%BB%B4%E7%A0%81.jpg "微信小程序演示.png")
 
 ## 更新日志
 
@@ -131,4 +131,4 @@ npm run dev
 * 如果您想使用功能更完善的教育系统，请联系以下企业微信！
 * 如果您想基于教育系统进行定制开发，我们提供有偿定制服务支持！
 * 其他合作模式不限，欢迎来撩！
-<img src="https://github.com/ChangyangOpenSource/education-training-system/blob/main/images/微信名片.png" alt="Logo" width="280" height="280">
+<img src="./images/微信名片.png" alt="Logo" width="280" height="280">
